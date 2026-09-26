@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StockSense - Stock Ledger</title>
+
+    <link rel="stylesheet" href="ledger.css">
+</head>
+
+<body>
+
+    <div class="page-container">
+
+        <div class="header">
+            <div>
+                <h1>Stock Ledger</h1>
+                <p>Complete history of inventory movements.</p>
+            </div>
+
+            <button id="backBtn">← Dashboard</button>
+        </div>
+
+        <div class="ledger-panel">
+
+            <div class="ledger-header">
+                <span>Product</span>
+                <span>Type</span>
+                <span>Quantity</span>
+                <span>Previous</span>
+                <span>New Stock</span>
+                <span>Reason</span>
+            </div>
+
+            <div id="ledgerContainer">
+                <p class="loading">Loading stock movements...</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="module" src="ledger.js"></script>
+
+</body>
+</html>

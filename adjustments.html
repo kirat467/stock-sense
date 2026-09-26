@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockSense - Inventory Adjustment</title>
+    <link rel="stylesheet" href="adjustments.css">
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <div class="header">
+        <div>
+            <h1>Inventory Adjustment</h1>
+            <p>Reconcile recorded stock with physical stock.</p>
+        </div>
+
+        <button id="backBtn">← Dashboard</button>
+    </div>
+
+    <div class="form-card">
+
+        <form id="adjustmentForm">
+
+            <label>Product</label>
+
+            <select id="productSelect" required>
+                <option value="">Select Product</option>
+            </select>
+
+            <label>Actual Physical Stock</label>
+
+            <input
+                type="number"
+                id="actualStock"
+                min="0"
+                required
+                placeholder="Enter actual stock"
+            >
+
+            <label>Reason</label>
+
+            <input
+                type="text"
+                id="reason"
+                required
+                placeholder="e.g. Damaged goods, stock count"
+            >
+
+            <button type="submit" class="adjust-btn">
+                Apply Adjustment
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script type="module" src="adjustments.js"></script>
+
+</body>
+</html>

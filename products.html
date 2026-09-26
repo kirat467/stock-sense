@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products - StockSense</title>
+
+    <link rel="stylesheet" href="products.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">S</div>
+                <div>
+                    <h2>StockSense</h2>
+                    <span>Inventory Management</span>
+                </div>
+            </div>
+
+            <nav class="nav">
+
+                <a href="dashboard.html">Dashboard</a>
+
+                <a href="products.html" class="active">
+                    Products
+                </a>
+
+                <a href="#">Receipts</a>
+                <a href="#">Deliveries</a>
+                <a href="#">Transfers</a>
+                <a href="#">Adjustments</a>
+                <a href="#">Move History</a>
+                <a href="#">Settings</a>
+
+            </nav>
+
+            <div class="profile-box">
+                <div class="avatar">U</div>
+
+                <div>
+                    <strong>User</strong>
+                    <small>Inventory Manager</small>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main">
+
+            <!-- TOP BAR -->
+            <header class="topbar">
+
+                <div>
+                    <h1>Products</h1>
+                    <p>Manage your inventory products</p>
+                </div>
+
+                <button id="addProductBtn" class="add-btn">
+                    + Add Product
+                </button>
+
+            </header>
+
+
+            <!-- STAT CARDS -->
+            <section class="stats">
+
+                <div class="stat-card">
+                    <span>Total Products</span>
+                    <strong id="totalProducts">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>In Stock</span>
+                    <strong id="inStockProducts">0</strong>
+                </div>
+
+                <div class="stat-card warning">
+                    <span>Low Stock</span>
+                    <strong id="lowStockProducts">0</strong>
+                </div>
+
+                <div class="stat-card danger">
+                    <span>Out of Stock</span>
+                    <strong id="outStockProducts">0</strong>
+                </div>
+
+            </section>
+
+
+            <!-- SEARCH / FILTER -->
+            <section class="toolbar">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by product name or SKU..."
+                >
+
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                </select>
+
+            </section>
+
+
+            <!-- PRODUCTS TABLE -->
+            <section class="table-card">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>SKU</th>
+                            <th>Category</th>
+                            <th>Unit</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="productsTableBody">
+
+                        <tr>
+                            <td colspan="7" class="empty">
+                                Loading products...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ADD PRODUCT MODAL -->
+
+    <div id="productModal" class="modal hidden">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2>Add Product</h2>
+                    <p>Create a new inventory product</p>
+                </div>
+
+                <button id="closeModal" class="close-btn">
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="productForm">
+
+                <label>
+                    Product Name
+
+                    <input
+                        type="text"
+                        id="productName"
+                        placeholder="Steel Rods"
+                        required
+                    >
+                </label>
+
+
+                <label>
+                    SKU / Code
+
+                    <input
+                        type="text"
+                        id="productSKU"
+                        placeholder="STL-001"
+                        required
+                    >
+                </label>
+
+
+                <label>
+                    Category
+
+                    <input
+                        type="text"
+                        id="productCategory"
+                        placeholder="Raw Material"
+                        required
+                    >
+                </label>
+
+
+                <label>
+                    Unit of Measure
+
+                    <select id="productUnit">
+
+                        <option value="pcs">Pieces</option>
+                        <option value="kg">Kilograms</option>
+                        <option value="g">Grams</option>
+                        <option value="litre">Litres</option>
+                        <option value="box">Boxes</option>
+                        <option value="meter">Meters</option>
+
+                    </select>
+
+                </label>
+
+
+                <label>
+                    Initial Stock
+
+                    <input
+                        type="number"
+                        id="productStock"
+                        min="0"
+                        value="0"
+                        required
+                    >
+                </label>
+
+
+                <label>
+                    Low Stock Threshold
+
+                    <input
+                        type="number"
+                        id="lowStockThreshold"
+                        min="0"
+                        value="5"
+                        required
+                    >
+                </label>
+
+
+                <button type="submit" class="save-btn">
+                    Add Product
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script type="module" src="products.js"></script>
+
+</body>
+</html>

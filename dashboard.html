@@ -30,7 +30,7 @@
                     Dashboard
                 </a>
 
-                <a href="#" class="nav-item">
+                <a href="products.html" class="nav-item">
                     <span>□</span>
                     Products
                 </a>
@@ -49,20 +49,20 @@
                     Deliveries
                 </a>
 
-                <a href="#" class="nav-item">
+                <a href="transfers.html" class="nav-item">
                     <span>⇄</span>
                     Transfers
                 </a>
 
-                <a href="#" class="nav-item">
-                    <span>◈</span>
+                <a href="adjustments.html" class="nav-item">
+                    <span>◇</span>
                     Adjustments
                 </a>
 
-                <a href="#" class="nav-item">
-                    <span>≡</span>
-                    Move History
-                </a>
+            <a href="ledger.html" class="nav-item">
+                <span>☷</span>
+                Move History
+            </a>
 
             </nav>
 
@@ -166,7 +166,7 @@
                         <div class="kpi-icon green">▦</div>
                     </div>
 
-                    <div class="kpi-value">1,248</div>
+                    <div class="kpi-value" id="dashboardTotalProducts">0</div>
 
                     <div class="kpi-footer positive">
                         ↑ 8.4%
@@ -183,7 +183,7 @@
                         <div class="kpi-icon red">!</div>
                     </div>
 
-                    <div class="kpi-value">23</div>
+                    <div class="kpi-value" id="dashboardLowStock">0</div>
 
                     <div class="kpi-footer negative">
                         ↑ 3 items
@@ -200,7 +200,7 @@
                         <div class="kpi-icon blue">↓</div>
                     </div>
 
-                    <div class="kpi-value">12</div>
+                    <div class="kpi-value" id="dashboardPendingReceipts">0</div>
 
                     <div class="kpi-footer neutral">
                         4 arriving today
@@ -216,7 +216,7 @@
                         <div class="kpi-icon orange">↑</div>
                     </div>
 
-                    <div class="kpi-value">8</div>
+                    <div class="kpi-value" id="dashboardPendingDeliveries">0</div>
 
                     <div class="kpi-footer neutral">
                         3 ready to ship
@@ -367,7 +367,7 @@
                     </div>
 
 
-                    <div class="product-list">
+                    <div class="alerts-list">
 
                         <div class="product-row">
 
@@ -464,9 +464,11 @@
                             <p>Latest inventory activity</p>
                         </div>
 
-                        <button class="text-btn">
+                    <button
+                        class="text-btn"
+                        onclick="window.location.href='ledger.html'">
                             View history →
-                        </button>
+                    </button>
 
                     </div>
 
@@ -577,7 +579,7 @@
 
                     <div class="quick-actions">
 
-                        <button class="quick-action">
+                        <button class="quick-action" onclick="window.location.href='receipts.html'">
                             <div class="quick-icon green">↓</div>
                             <div>
                                 <strong>Receive Stock</strong>
@@ -587,7 +589,7 @@
                         </button>
 
 
-                        <button class="quick-action">
+                        <button class="quick-action" onclick="window.location.href='delivery.html'">
                             <div class="quick-icon red">↑</div>
                             <div>
                                 <strong>Create Delivery</strong>
@@ -597,7 +599,10 @@
                         </button>
 
 
-                        <button class="quick-action">
+                        <button
+                            class="quick-action"
+                            onclick="window.location.href='transfers.html'"
+                        >
                             <div class="quick-icon blue">⇄</div>
                             <div>
                                 <strong>Transfer Stock</strong>
@@ -606,15 +611,17 @@
                             <b>→</b>
                         </button>
 
-
-                        <button class="quick-action">
-                            <div class="quick-icon orange">◈</div>
-                            <div>
-                                <strong>Adjust Inventory</strong>
-                                <span>Fix stock discrepancies</span>
-                            </div>
-                            <b>→</b>
-                        </button>
+                    <button
+                        class="quick-action"
+                        onclick="window.location.href='adjustments.html'"
+                    >
+                        <div class="quick-icon orange">◈</div>
+                        <div>
+                            <strong>Adjust Inventory</strong>
+                            <span>Fix stock discrepancies</span>
+                        </div>
+                        <b>→</b>
+                    </button>
 
                     </div>
 

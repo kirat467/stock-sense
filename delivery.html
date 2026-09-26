@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockSense - Delivery Orders</title>
+    <link rel="stylesheet" href="delivery.css">
+</head>
+
+<body>
+
+    <div class="page-container">
+
+        <h1>Delivery Orders</h1>
+        <p>Deliver products and automatically decrease inventory stock.</p>
+
+        <button id="backBtn">← Dashboard</button>
+
+        <hr>
+
+        <h2>Create Delivery Order</h2>
+
+        <form id="deliveryForm">
+
+            <label>Product</label>
+
+            <select id="productSelect" required>
+                <option value="">Select Product</option>
+            </select>
+
+            <br><br>
+
+            <label>Quantity Delivered</label>
+
+            <input
+                type="number"
+                id="quantity"
+                min="1"
+                required
+            >
+
+            <br><br>
+
+            <label>Customer / Destination</label>
+
+            <input
+                type="text"
+                id="destination"
+                placeholder="Customer or destination"
+                required
+            >
+
+            <br><br>
+
+            <button type="submit">Validate Delivery</button>
+
+        </form>
+
+    </div>
+
+    <script type="module" src="delivery.js"></script>
+
+</body>
+</html>

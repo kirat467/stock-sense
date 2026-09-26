@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockSense - Transfers</title>
+    <link rel="stylesheet" href="transfers.css">
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <div class="header">
+        <div>
+            <h1>Internal Stock Transfer</h1>
+            <p>Move inventory between company locations.</p>
+        </div>
+
+        <button id="backBtn">← Dashboard</button>
+    </div>
+
+    <div class="form-card">
+
+        <form id="transferForm">
+
+            <label>Product</label>
+
+            <select id="productSelect" required>
+                <option value="">Select Product</option>
+            </select>
+
+            <label>Quantity</label>
+
+            <input
+                type="number"
+                id="quantity"
+                min="1"
+                required
+                placeholder="Enter quantity"
+            >
+
+            <label>From Location</label>
+
+            <select id="fromLocation" required>
+                <option value="">Select source</option>
+                <option>Main Warehouse</option>
+                <option>Warehouse 1</option>
+                <option>Warehouse 2</option>
+                <option>Production Rack</option>
+            </select>
+
+            <label>To Location</label>
+
+            <select id="toLocation" required>
+                <option value="">Select destination</option>
+                <option>Main Warehouse</option>
+                <option>Warehouse 1</option>
+                <option>Warehouse 2</option>
+                <option>Production Rack</option>
+            </select>
+
+            <button type="submit" class="transfer-btn">
+                Validate Transfer
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script type="module" src="transfers.js"></script>
+
+</body>
+</html>
