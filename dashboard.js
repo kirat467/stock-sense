@@ -919,34 +919,93 @@ async function loadRecentMovements() {
 ========================= */
 
 if (logoutBtn) {
-
-    logoutBtn.addEventListener(
-        "click",
-        async () => {
-
-            try {
-
-                await signOut(auth);
-
-                window.location.href =
-                    "index.html";
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    "Logout error:",
-                    error
-                );
-
-                alert(
-                    "Unable to logout. Please try again."
-                );
-
-            }
-
+    logoutBtn.addEventListener("click", async () => {
+        try {
+            await signOut(auth);
+            window.location.href = "index.html";
+        } catch (error) {
+            console.error("Logout error:", error);
+            alert("Unable to logout. Please try again.");
         }
-    );
+    });
+}
 
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+const notificationBtn =
+    document.getElementById("notificationBtn");
+
+const notificationPanel =
+    document.getElementById("notificationPanel");
+
+const closeNotifications =
+    document.getElementById("closeNotifications");
+
+const notificationList =
+    document.getElementById("notificationList");
+
+if (notificationBtn && notificationPanel) {
+    notificationBtn.addEventListener("click", () => {
+        notificationPanel.classList.toggle("show");
+        if (typeof loadNotifications === "function") {
+            loadNotifications();
+        }
+    });
+}
+
+if (closeNotifications && notificationPanel) {
+    closeNotifications.addEventListener("click", () => {
+        notificationPanel.classList.remove("show");
+    });
+}
+
+async function loadNotifications() {
+    try {
+        const products = await getProducts();
+
+        const lowStockProducts = products.filter(product => {
+            const stock = Number(product.stock) || 0;
+            const threshold = Number(product.lowStockThreshold) || 5;
+
+            return stock <= threshold;
+        });
+
+        notificationList.innerHTML = "";
+
+        if (lowStockProducts.length === 0) {
+            notificationList.innerHTML = `
+                <p class="no-notifications">
+                    ✓ No new notifications
+                </p>
+            `;
+            return;
+        }
+
+        lowStockProducts.forEach(product => {
+            const stock = Number(product.stock) || 0;
+
+            const notification = document.createElement("div");
+            notification.className = "notification-item";
+
+            notification.innerHTML = `
+                <div class="notification-icon">!</div>
+                <div>
+                    <strong>${product.name}</strong>
+                    <p>
+                        ${stock === 0
+                            ? "Out of stock"
+                            : `Low stock: ${stock} ${product.unit || ""}`}
+                    </p>
+                </div>
+            `;
+
+            notificationList.appendChild(notification);
+        });
+
+    } catch (error) {
+        console.error("Notification error:", error);
+    }
 }

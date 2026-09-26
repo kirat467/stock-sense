@@ -933,3 +933,67 @@ button {
         display: none;
     }
 }
+
+.notification-panel {
+    position: absolute;
+    top: 70px;
+    right: 30px;
+    width: 320px;
+    background: #11161c;
+    border: 1px solid #29313a;
+    border-radius: 12px;
+    padding: 16px;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.notification-panel.show {
+    display: block;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.notification-header button {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.notification-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid #252c33;
+}
+
+.notification-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 77, 103, 0.15);
+    color: #ff4d67;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.notification-item p {
+    margin: 4px 0 0;
+    color: #8f9ba8;
+    font-size: 13px;
+}
+
+.no-notifications {
+    color: #8f9ba8;
+    text-align: center;
+    padding: 15px;
+}

@@ -18,22 +18,29 @@ import {
 // ===============================
 
 async function addProduct(product) {
-
     console.log("1. addProduct() started");
+
+    const initialStock = Number(product.stock) || 0;
 
     const productData = {
         name: product.name,
         sku: product.sku,
         category: product.category,
         unit: product.unit,
-        stock: Number(product.stock) || 0,
+        stock: initialStock,
         lowStockThreshold: Number(product.lowStockThreshold) || 5,
+
+        warehouses: {
+            "Main Warehouse": initialStock,
+            "Warehouse 1": 0,
+            "Warehouse 2": 0,
+            "Production Rack": 0
+        },
+
         createdAt: serverTimestamp()
     };
 
     console.log("2. Product data prepared:", productData);
-
-    console.log("3. About to write to Firestore...");
 
     const productRef = await addDoc(
         collection(db, "products"),

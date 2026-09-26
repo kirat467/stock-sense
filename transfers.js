@@ -4,6 +4,8 @@ import {
     collection,
     getDocs,
     addDoc,
+    doc,
+    updateDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
@@ -30,7 +32,8 @@ async function loadProducts() {
 
         products.forEach(product => {
 
-            const option = document.createElement("option");
+            const option =
+                document.createElement("option");
 
             option.value = product.id;
 
@@ -46,6 +49,7 @@ async function loadProducts() {
         console.error("Product loading error:", error);
 
         alert("Unable to load products.");
+
     }
 }
 
@@ -58,7 +62,9 @@ transferForm.addEventListener("submit", async (event) => {
         productSelect.value;
 
     const quantity =
-        Number(document.getElementById("quantity").value);
+        Number(
+            document.getElementById("quantity").value
+        );
 
     const fromLocation =
         document.getElementById("fromLocation").value;
@@ -69,7 +75,9 @@ transferForm.addEventListener("submit", async (event) => {
 
     if (!productId || quantity <= 0) {
 
-        alert("Please select a product and valid quantity.");
+        alert(
+            "Please select a product and valid quantity."
+        );
 
         return;
     }
@@ -77,7 +85,9 @@ transferForm.addEventListener("submit", async (event) => {
 
     if (fromLocation === toLocation) {
 
-        alert("Source and destination must be different.");
+        alert(
+            "Source and destination must be different."
+        );
 
         return;
     }
@@ -85,6 +95,79 @@ transferForm.addEventListener("submit", async (event) => {
 
     try {
 
+        // Get product
+        const productRef =
+            doc(db, "products", productId);
+
+        const productSnapshot =
+            await getDocs(
+                collection(db, "products")
+            );
+
+        const products =
+            productSnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+
+        const product =
+            products.find(p => p.id === productId);
+
+
+        if (!product) {
+
+            alert("Product not found.");
+
+            return;
+        }
+
+
+        // Existing warehouse data
+        const warehouses =
+            product.warehouses || {
+                "Main Warehouse": 0,
+                "Warehouse 1": 0,
+                "Warehouse 2": 0,
+                "Production Rack": 0
+            };
+
+
+        const sourceStock =
+            Number(warehouses[fromLocation]) || 0;
+
+
+        // Check source warehouse stock
+        if (quantity > sourceStock) {
+
+            alert(
+                `Not enough stock in ${fromLocation}.\n\n` +
+                `Available: ${sourceStock}\n` +
+                `Requested: ${quantity}`
+            );
+
+            return;
+        }
+
+
+        // Move stock
+        warehouses[fromLocation] =
+            sourceStock - quantity;
+
+        warehouses[toLocation] =
+            (Number(warehouses[toLocation]) || 0)
+            + quantity;
+
+
+        // Update product
+        await updateDoc(
+            productRef,
+            {
+                warehouses: warehouses
+            }
+        );
+
+
+        // Record transfer in ledger
         await addDoc(
             collection(db, "stockLedger"),
             {
@@ -106,18 +189,28 @@ transferForm.addEventListener("submit", async (event) => {
         );
 
 
-        alert("Stock transfer recorded successfully!");
+        alert(
+            `Transfer successful!\n\n` +
+            `${quantity} moved from ${fromLocation} to ${toLocation}.`
+        );
 
         transferForm.reset();
 
+        await loadProducts();
+
+
     } catch (error) {
 
-        console.error("Transfer error:", error);
+        console.error(
+            "Transfer error:",
+            error
+        );
 
         alert(
             "Unable to record transfer.\n\n" +
             error.message
         );
+
     }
 
 });
@@ -125,7 +218,8 @@ transferForm.addEventListener("submit", async (event) => {
 
 backBtn.addEventListener("click", () => {
 
-    window.location.href = "dashboard.html";
+    window.location.href =
+        "dashboard.html";
 
 });
 

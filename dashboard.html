@@ -85,7 +85,7 @@
                     </div>
 
                     <button id="logoutBtn" title="Logout">
-                        ↪
+                        ↪LogOut
                     </button>
 
                 </div>
@@ -111,10 +111,20 @@
 
                 <div class="top-actions">
 
-                    <button class="icon-button">
+                    <button class="icon-btn" id="notificationBtn">
                         🔔
-                        <span class="notification-dot"></span>
                     </button>
+
+                    <div class="notification-panel" id="notificationPanel">
+                        <div class="notification-header">
+                            <strong>Notifications</strong>
+                            <button id="closeNotifications">x</button>
+                        </div>
+
+                        <div id="notificationList">
+                            <p class="no-notifications">No new notifications</p>
+                        </div>
+                    </div>
 
                     <div class="top-profile">
 
