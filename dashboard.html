@@ -39,12 +39,12 @@
                     OPERATIONS
                 </div>
 
-                <a href="#" class="nav-item">
+                <a href="receipts.html" class="nav-item">
                     <span>↓</span>
                     Receipts
                 </a>
 
-                <a href="#" class="nav-item">
+                <a href="delivery.html" class="nav-item">
                     <span>↑</span>
                     Deliveries
                 </a>
@@ -59,10 +59,10 @@
                     Adjustments
                 </a>
 
-            <a href="ledger.html" class="nav-item">
-                <span>☷</span>
-                Move History
-            </a>
+                <a href="ledger.html" class="nav-item">
+                    <span>☷</span>
+                    Move History
+                </a>
 
             </nav>
 
@@ -149,9 +149,9 @@
                     </p>
                 </div>
 
-                <button class="primary-btn">
-                    + Add Product
-                </button>
+            <button class="primary-btn" onclick="window.location.href='products.html'">
+                + Add Product
+            </button>
 
             </section>
 
@@ -168,9 +168,8 @@
 
                     <div class="kpi-value" id="dashboardTotalProducts">0</div>
 
-                    <div class="kpi-footer positive">
-                        ↑ 8.4%
-                        <span>from last month</span>
+                    <div class="kpi-footer positive" id="dashboardProductChange">
+                        <span>Loading...</span>
                     </div>
 
                 </div>
@@ -185,9 +184,8 @@
 
                     <div class="kpi-value" id="dashboardLowStock">0</div>
 
-                    <div class="kpi-footer negative">
-                        ↑ 3 items
-                        <span>need attention</span>
+                    <div class="kpi-footer negative" id="dashboardLowStockFooter">
+                        <span>Loading...</span>
                     </div>
 
                 </div>
@@ -200,11 +198,11 @@
                         <div class="kpi-icon blue">↓</div>
                     </div>
 
-                    <div class="kpi-value" id="dashboardPendingReceipts">0</div>
+                        <div class="kpi-value" id="dashboardPendingReceipts">0</div>
 
-                    <div class="kpi-footer neutral">
-                        4 arriving today
-                    </div>
+                        <div class="kpi-footer neutral" id="dashboardReceiptsFooter">
+                            <span>Loading...</span>
+                        </div>
 
                 </div>
 
@@ -216,11 +214,11 @@
                         <div class="kpi-icon orange">↑</div>
                     </div>
 
-                    <div class="kpi-value" id="dashboardPendingDeliveries">0</div>
+                        <div class="kpi-value" id="dashboardPendingDeliveries">0</div>
 
-                    <div class="kpi-footer neutral">
-                        3 ready to ship
-                    </div>
+                        <div class="kpi-footer neutral" id="dashboardDeliveriesFooter">
+                            <span>Loading...</span>
+                        </div>
 
                 </div>
 
@@ -269,67 +267,35 @@
                             <div class="grid-line"></div>
 
                             <svg viewBox="0 0 700 260"
-                                 preserveAspectRatio="none">
-
-                                <defs>
-                                    <linearGradient id="chartFill"
-                                                    x1="0"
-                                                    y1="0"
-                                                    x2="0"
-                                                    y2="1">
-
-                                        <stop offset="0"
-                                              stop-color="#19c37d"
-                                              stop-opacity=".25"/>
-
-                                        <stop offset="1"
-                                              stop-color="#19c37d"
-                                              stop-opacity="0"/>
-
-                                    </linearGradient>
-                                </defs>
+                                preserveAspectRatio="none">
 
                                 <path
-                                    d="M0 205
-                                       L100 175
-                                       L200 190
-                                       L300 125
-                                       L400 145
-                                       L500 85
-                                       L600 110
-                                       L700 55
-                                       L700 260
-                                       L0 260Z"
-                                    fill="url(#chartFill)"
-                                />
+                                    id="incomingArea"
+                                    fill="rgba(25,195,125,0.15)"
+                                    stroke="none">
+                                </path>
 
                                 <path
-                                    d="M0 205
-                                       L100 175
-                                       L200 190
-                                       L300 125
-                                       L400 145
-                                       L500 85
-                                       L600 110
-                                       L700 55"
+                                    id="incomingLine"
                                     fill="none"
                                     stroke="#19c37d"
                                     stroke-width="4"
                                     stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
+                                    stroke-linejoin="round">
+                                </path>
+
+                                <path
+                                    id="outgoingLine"
+                                    fill="none"
+                                    stroke="#ff4d67"
+                                    stroke-width="3"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                </path>
 
                             </svg>
 
-                            <div class="chart-days">
-                                <span>Mon</span>
-                                <span>Tue</span>
-                                <span>Wed</span>
-                                <span>Thu</span>
-                                <span>Fri</span>
-                                <span>Sat</span>
-                                <span>Sun</span>
-                            </div>
+                            <div class="chart-days" id="chartDays"></div>
 
                         </div>
 
