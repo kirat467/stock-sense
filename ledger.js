@@ -1,10 +1,10 @@
-import { db } from "./backend/firebase.js";
+import { db, auth } from "./backend/firebase.js";
 
 import {
     collection,
     getDocs,
     query,
-    orderBy
+    where
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 import { getProducts } from "./backend/products.js";
@@ -29,7 +29,7 @@ async function loadLedger() {
 
         const ledgerQuery = query(
             collection(db, "stockLedger"),
-            orderBy("createdAt", "desc")
+            where("ownerId", "==", auth.currentUser.uid)
         );
 
         const snapshot = await getDocs(ledgerQuery);

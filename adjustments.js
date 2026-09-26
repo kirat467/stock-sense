@@ -1,5 +1,4 @@
-import { db } from "./backend/firebase.js";
-
+import { db, auth } from "./backend/firebase.js";
 import {
     doc,
     getDoc,
@@ -116,18 +115,16 @@ adjustmentForm.addEventListener("submit", async (event) => {
         });
 
 
-        await addDoc(
-            collection(db, "stockLedger"),
-            {
-                productId: productId,
+            await addDoc(collection(db, "stockLedger"), {
+                productId,
+                ownerId: auth.currentUser.uid,
                 type: "ADJUSTMENT",
                 quantity: Math.abs(difference),
-                previousStock: previousStock,
+                previousStock,
                 newStock: actualStock,
-                reason: reason,
+                reason,
                 createdAt: serverTimestamp()
-            }
-        );
+            });
 
 
             showToast(

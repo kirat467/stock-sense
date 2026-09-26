@@ -1,6 +1,6 @@
 // backend/products.js
 
-import { db } from "./firebase.js";
+import { db, auth } from "./firebase.js";
 
 import {
     collection,
@@ -9,8 +9,30 @@ import {
     doc,
     updateDoc,
     deleteDoc,
+    query,
+    where,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+// GET CURRENT USER
+async function getCurrentUser() {
+    if (auth.currentUser) {
+        return auth.currentUser;
+    }
+
+    return new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            unsubscribe();
+
+            if (user) {
+                resolve(user);
+            } else {
+                reject(new Error("User is not logged in."));
+            }
+        });
+    });
+}
 
 
 // ===============================
@@ -18,7 +40,7 @@ import {
 // ===============================
 
 async function addProduct(product) {
-    console.log("1. addProduct() started");
+    const user = await getCurrentUser();
 
     const initialStock = Number(product.stock) || 0;
 
@@ -37,39 +59,37 @@ async function addProduct(product) {
             "Production Rack": 0
         },
 
+        ownerId: user.uid,
+
         createdAt: serverTimestamp()
     };
-
-    console.log("2. Product data prepared:", productData);
 
     const productRef = await addDoc(
         collection(db, "products"),
         productData
     );
 
-    console.log("4. Firestore write completed:", productRef.id);
-
     return productRef.id;
 }
 
 
 // ===============================
-// GET ALL PRODUCTS
+// GET CURRENT USER'S PRODUCTS
 // ===============================
 
 async function getProducts() {
+    const user = await getCurrentUser();
 
-    const snapshot =
-        await getDocs(
-            collection(db, "products")
-        );
+    const productsQuery = query(
+        collection(db, "products"),
+        where("ownerId", "==", user.uid)
+    );
 
+    const snapshot = await getDocs(productsQuery);
 
-    return snapshot.docs.map(doc => ({
-
-        id: doc.id,
-        ...doc.data()
-
+    return snapshot.docs.map(documentSnapshot => ({
+        id: documentSnapshot.id,
+        ...documentSnapshot.data()
     }));
 }
 
@@ -79,11 +99,26 @@ async function getProducts() {
 // ===============================
 
 async function updateProduct(productId, data) {
+    const user = await getCurrentUser();
 
-    await updateDoc(
-        doc(db, "products", productId),
-        data
+    const productRef = doc(db, "products", productId);
+
+    const snapshot = await getDocs(
+        query(
+            collection(db, "products"),
+            where("ownerId", "==", user.uid)
+        )
     );
+
+    const ownsProduct = snapshot.docs.some(
+        documentSnapshot => documentSnapshot.id === productId
+    );
+
+    if (!ownsProduct) {
+        throw new Error("You do not have access to this product.");
+    }
+
+    await updateDoc(productRef, data);
 }
 
 
@@ -92,10 +127,26 @@ async function updateProduct(productId, data) {
 // ===============================
 
 async function deleteProduct(productId) {
+    const user = await getCurrentUser();
 
-    await deleteDoc(
-        doc(db, "products", productId)
+    const productRef = doc(db, "products", productId);
+
+    const snapshot = await getDocs(
+        query(
+            collection(db, "products"),
+            where("ownerId", "==", user.uid)
+        )
     );
+
+    const ownsProduct = snapshot.docs.some(
+        documentSnapshot => documentSnapshot.id === productId
+    );
+
+    if (!ownsProduct) {
+        throw new Error("You do not have access to this product.");
+    }
+
+    await deleteDoc(productRef);
 }
 
 

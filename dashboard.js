@@ -9,6 +9,7 @@ import {
     collection,
     getDocs,
     query,
+    where,
     orderBy
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
@@ -467,6 +468,7 @@ async function loadStockChart() {
             await getDocs(
                 query(
                     collection(db, "stockLedger"),
+                    where("ownerId", "==", auth.currentUser.uid),
                     orderBy("createdAt", "asc")
                 )
             );
@@ -764,6 +766,7 @@ async function loadRecentMovements() {
             await getDocs(
                 query(
                     collection(db, "stockLedger"),
+                    where("ownerId", "==", auth.currentUser.uid),
                     orderBy("createdAt", "desc")
                 )
             );

@@ -1,9 +1,8 @@
-import { db } from "./backend/firebase.js";
+import { db, auth } from "./backend/firebase.js";
 
 import {
-    collection,
-    getDocs,
     addDoc,
+    collection,
     doc,
     updateDoc,
     serverTimestamp
@@ -11,15 +10,14 @@ import {
 
 import { getProducts } from "./backend/products.js";
 
-const productSelect =
-    document.getElementById("productSelect");
+const productSelect = document.getElementById("product");
+const transferForm = document.getElementById("transferForm");
+const backBtn = document.getElementById("backBtn");
 
-const transferForm =
-    document.getElementById("transferForm");
 
-const backBtn =
-    document.getElementById("backBtn");
-
+// ===============================
+// LOAD PRODUCTS
+// ===============================
 
 async function loadProducts() {
 
@@ -32,39 +30,36 @@ async function loadProducts() {
 
         products.forEach(product => {
 
-            const option =
-                document.createElement("option");
+            const option = document.createElement("option");
 
             option.value = product.id;
-
             option.textContent =
-                `${product.name} (${product.sku}) - Stock: ${product.stock}`;
+                `${product.name} (${product.sku})`;
 
             productSelect.appendChild(option);
-
         });
 
     } catch (error) {
 
-        console.error("Product loading error:", error);
-
-        alert("Unable to load products.");
-
+        console.error("Error loading products:", error);
+        alert(error.message);
     }
 }
 
+
+// ===============================
+// TRANSFER STOCK
+// ===============================
 
 transferForm.addEventListener("submit", async (event) => {
 
     event.preventDefault();
 
     const productId =
-        productSelect.value;
+        document.getElementById("product").value;
 
     const quantity =
-        Number(
-            document.getElementById("quantity").value
-        );
+        Number(document.getElementById("quantity").value);
 
     const fromLocation =
         document.getElementById("fromLocation").value;
@@ -73,96 +68,85 @@ transferForm.addEventListener("submit", async (event) => {
         document.getElementById("toLocation").value;
 
 
-    if (!productId || quantity <= 0) {
-
-        alert(
-            "Please select a product and valid quantity."
-        );
-
+    if (!productId) {
+        alert("Please select a product.");
         return;
     }
 
+    if (!quantity || quantity <= 0) {
+        alert("Please enter a valid quantity.");
+        return;
+    }
 
     if (fromLocation === toLocation) {
-        alert(
-            "Source and destination must be different."
-        );
+        alert("Source and destination cannot be the same.");
         return;
     }
 
 
     try {
 
-        // Get product
-        const productRef =
-            doc(db, "products", productId);
+        const user = auth.currentUser;
 
-        const productSnapshot =
-            await getDocs(
-                collection(db, "products")
-            );
-
-        const products =
-            productSnapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-
-        const product =
-            products.find(p => p.id === productId);
-
-
-        if (!product) {
-
-            alert("Product not found.");
-
-            return;
+        if (!user) {
+            throw new Error("User is not logged in.");
         }
 
 
-        // Existing warehouse data
-        const warehouses =
-            product.warehouses || {
-                "Main Warehouse": 0,
-                "Warehouse 1": 0,
-                "Warehouse 2": 0,
-                "Production Rack": 0
-            };
+        // Get ONLY current user's products
+        const products = await getProducts();
+
+        const product =
+            products.find(product => product.id === productId);
+
+
+        if (!product) {
+            throw new Error(
+                "Product not found or you do not have access to it."
+            );
+        }
+
+
+        const productRef =
+            doc(db, "products", productId);
+
+
+        const warehouses = product.warehouses || {
+            "Main Warehouse": 0,
+            "Warehouse 1": 0,
+            "Warehouse 2": 0,
+            "Production Rack": 0
+        };
 
 
         const sourceStock =
             Number(warehouses[fromLocation]) || 0;
 
 
-        // Check source warehouse stock
         if (quantity > sourceStock) {
 
             alert(
-                `Not enough stock in ${fromLocation}.\n\n` +
-                `Available: ${sourceStock}\n` +
-                `Requested: ${quantity}`
+                `Not enough stock in ${fromLocation}. Available: ${sourceStock}`
             );
 
             return;
         }
 
 
-        // Move stock
+        // Remove from source
         warehouses[fromLocation] =
             sourceStock - quantity;
 
+
+        // Add to destination
         warehouses[toLocation] =
-            (Number(warehouses[toLocation]) || 0)
-            + quantity;
+            (Number(warehouses[toLocation]) || 0) + quantity;
 
 
-        // Update product
-        await updateDoc(
-            productRef,
-            {
-                warehouses: warehouses
-            }
-        );
+        // Update product warehouses
+        await updateDoc(productRef, {
+            warehouses: warehouses
+        });
 
 
         // Record transfer in ledger
@@ -170,6 +154,7 @@ transferForm.addEventListener("submit", async (event) => {
             collection(db, "stockLedger"),
             {
                 productId: productId,
+                ownerId: user.uid,
                 type: "TRANSFER",
                 quantity: quantity,
                 fromLocation: fromLocation,
@@ -180,36 +165,41 @@ transferForm.addEventListener("submit", async (event) => {
             }
         );
 
+
         showToast(
             `${quantity} moved from ${fromLocation} to ${toLocation}.`,
             "Transfer Completed"
         );
+
+
         transferForm.reset();
+
         await loadProducts();
+
 
     } catch (error) {
 
-        console.error(
-            "Transfer error:",
-            error
-        );
+        console.error("Transfer error:", error);
 
-        alert(
-            "Unable to record transfer.\n\n" +
-            error.message
-        );
-
+        alert(error.message);
     }
 
 });
 
 
+// ===============================
+// BACK BUTTON
+// ===============================
+
 backBtn.addEventListener("click", () => {
 
-    window.location.href =
-        "dashboard.html";
+    window.location.href = "dashboard.html";
 
 });
 
+
+// ===============================
+// INITIAL LOAD
+// ===============================
 
 loadProducts();
