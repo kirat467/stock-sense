@@ -237,6 +237,27 @@ modal.onclick = function(event) {
     }
 };
 
-document.getElementById("demoDashboardBtn").addEventListener("click", () => {
-    window.location.href = "dashboard.html";
+document.getElementById("demoDashboardBtn").addEventListener("click", async () => {
+
+    const demoEmail = "demo@stocksense.app";
+    const demoPassword = "StockSenseDemo123";
+
+    try {
+        const result = await loginUser(
+            demoEmail,
+            demoPassword
+        );
+        if (result.success) {
+            window.location.href = "dashboard.html";
+        } else {
+            console.error("Demo login failed:", result.error);
+            alert(
+                "Demo login failed.\n\n" +
+                result.error
+            );
+        }
+    } catch (error) {
+        console.error("Demo login error:", error);
+        alert("Unable to start demo mode.");
+    }
 });
