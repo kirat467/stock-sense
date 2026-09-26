@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StockSense — Authentication</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="shell">
+
+        <!-- LEFT SIDE -->
+        <section class="hero">
+
+            <div>
+
+                <div class="brand">
+                    <div class="logo">↗</div>
+                    StockSense
+                </div>
+
+                <div class="hero-content">
+
+                    <div class="eyebrow">
+                        INVENTORY INTELLIGENCE
+                    </div>
+
+                    <h1>
+                        Know your <span>stock.</span><br>
+                        Move smarter.
+                    </h1>
+
+                    <p>
+                        Centralize products, receipts, deliveries,
+                        transfers and stock adjustments in one simple
+                        inventory workspace.
+                    </p>
+
+                    <div class="ticker">
+
+                        <div class="chip up">
+                            ● INCOMING +12.4%
+                        </div>
+
+                        <div class="chip down">
+                            ● OUTGOING −4.8%
+                        </div>
+
+                        <div class="chip">
+                            LIVE INVENTORY
+                        </div>
+
+                    </div>
+
+                    <div class="mini-chart">
+
+                        <svg viewBox="0 0 500 150"
+                             preserveAspectRatio="none">
+
+                            <defs>
+
+                                <linearGradient
+                                    id="g"
+                                    x1="0"
+                                    x2="0"
+                                    y1="0"
+                                    y2="1">
+
+                                    <stop
+                                        offset="0"
+                                        stop-color="#19c37d"
+                                        stop-opacity=".28"/>
+
+                                    <stop
+                                        offset="1"
+                                        stop-color="#19c37d"
+                                        stop-opacity="0"/>
+
+                                </linearGradient>
+
+                            </defs>
+
+                            <path
+                                d="M0 125 L45 112 L85 119 L125 92
+                                   L165 101 L205 65 L245 78 L285 51
+                                   L325 67 L365 42 L405 58 L450 22
+                                   L500 35 L500 150 L0 150Z"
+                                fill="url(#g)"
+                            />
+
+                            <path
+                                d="M0 125 L45 112 L85 119 L125 92
+                                   L165 101 L205 65 L245 78 L285 51
+                                   L325 67 L365 42 L405 58 L450 22
+                                   L500 35"
+                                fill="none"
+                                stroke="#19c37d"
+                                stroke-width="3"
+                            />
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="hero-footer">
+                StockSense • Inventory Management System
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT SIDE -->
+        <section class="auth">
+
+            <div class="card">
+
+                <!-- LOGIN / SIGNUP TABS -->
+
+                <div class="tabs">
+
+                    <button
+                        class="tab active"
+                        id="loginTab">
+
+                        Log in
+
+                    </button>
+
+                    <button
+                        class="tab"
+                        id="signupTab">
+
+                        Sign up
+
+                    </button>
+
+                </div>
+
+
+                <!-- LOGIN -->
+
+                <div id="loginView">
+
+                    <h2>Welcome back</h2>
+
+                    <p class="subtitle">
+                        Log in to continue to your inventory dashboard.
+                    </p>
+
+                    <form id="loginForm">
+
+                        <div class="field">
+
+                            <label>
+                                Email address
+                            </label>
+
+                            <input
+                                type="email"
+                                placeholder="you@company.com"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                placeholder="••••••••"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <label class="remember">
+
+                                <input type="checkbox">
+
+                                Remember me
+
+                            </label>
+
+                            <button
+                                type="button"
+                                class="link"
+                                id="resetBtn">
+
+                                Forgot password?
+
+                            </button>
+
+                        </div>
+
+
+                        <button
+                            class="primary"
+                            type="submit">
+
+                            Log in to StockSense →
+
+                        </button>
+
+
+                        <div
+                            class="notice"
+                            id="loginNotice">
+
+                            Demo login submitted —
+                            connect this form to the backend.
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- SIGNUP -->
+
+                <div
+                    id="signupView"
+                    style="display:none">
+
+                    <h2>Create account</h2>
+
+                    <p class="subtitle">
+                        Set up your StockSense workspace
+                        in a few seconds.
+                    </p>
+
+                    <form id="signupForm">
+
+                        <div class="field">
+
+                            <label>
+                                Full name
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="Your name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Work email
+                            </label>
+
+                            <input
+                                type="email"
+                                placeholder="you@company.com"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                placeholder="Create a password"
+                                required
+                            >
+
+                        </div>
+
+
+                        <button
+                            class="primary"
+                            type="submit">
+
+                            Create StockSense account →
+
+                        </button>
+
+
+                        <div
+                            class="notice"
+                            id="signupNotice">
+
+                            Demo signup submitted —
+                            connect this form to the backend.
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <div class="divider">
+                    SECURE INVENTORY WORKSPACE
+                </div>
+
+
+                <p class="demo">
+                    After authentication, users will be
+                    redirected to the Inventory Dashboard.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- PASSWORD RESET MODAL -->
+
+    <div
+        class="modal"
+        id="modal">
+
+        <div class="modal-box">
+
+            <button
+                class="close"
+                id="closeModal">
+
+                ×
+
+            </button>
+
+            <h2>
+                Reset password
+            </h2>
+
+            <p class="subtitle">
+
+                Enter your email and we'll send an
+                OTP to reset your password.
+
+            </p>
+
+
+            <div class="field">
+
+                <label>
+                    Email address
+                </label>
+
+                <input
+                    id="resetEmail"
+                    type="email"
+                    placeholder="you@company.com"
+                >
+
+            </div>
+
+
+            <button
+                class="primary"
+                id="sendOtp">
+
+                Send OTP →
+
+            </button>
+
+
+            <div
+                class="notice"
+                id="otpNotice">
+
+                Demo OTP request submitted —
+                connect this to the authentication backend.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
