@@ -53,7 +53,10 @@ deliveryForm.addEventListener("submit", async (event) => {
             `Delivery to ${destination}`
         );
 
-        alert("Delivery validated! Stock decreased successfully.");
+        showToast(
+            "Stock decreased successfully.",
+            "Delivery Validated"
+        );
 
         deliveryForm.reset();
 

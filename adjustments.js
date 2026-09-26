@@ -102,7 +102,10 @@ adjustmentForm.addEventListener("submit", async (event) => {
 
         if (difference === 0) {
 
-            alert("No adjustment needed. Stock is already correct.");
+           showToast(
+                "Stock is already correct. No adjustment was needed.",
+                "No Adjustment"
+            );
 
             return;
         }
@@ -117,27 +120,20 @@ adjustmentForm.addEventListener("submit", async (event) => {
             collection(db, "stockLedger"),
             {
                 productId: productId,
-
                 type: "ADJUSTMENT",
-
                 quantity: Math.abs(difference),
-
                 previousStock: previousStock,
-
                 newStock: actualStock,
-
                 reason: reason,
-
                 createdAt: serverTimestamp()
             }
         );
 
 
-        alert(
-            `Inventory adjusted successfully!\n\n` +
-            `Previous stock: ${previousStock}\n` +
-            `New stock: ${actualStock}`
-        );
+            showToast(
+                `Previous stock: ${previousStock} → New stock: ${actualStock}`,
+                "Inventory Adjusted"
+            );
 
 
         adjustmentForm.reset();

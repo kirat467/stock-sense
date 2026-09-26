@@ -106,23 +106,14 @@ onAuthStateChanged(auth, async (user) => {
 async function loadDashboardData() {
 
     try {
-
-        console.log("Loading dashboard data...");
-
         const products = await getProducts();
-
-        console.log("Products received:", products);
-
-
         /* =========================
            TOTAL PRODUCTS
         ========================= */
 
         const totalProducts = products.length;
-
         totalProductsElement.textContent =
             totalProducts;
-
 
         /* =========================
            LOW STOCK
@@ -150,13 +141,11 @@ async function loadDashboardData() {
         lowStockFooter.innerHTML =
             `<span>${lowStockCount} item${lowStockCount === 1 ? "" : "s"} need attention</span>`;
 
-
         /* =========================
            PRODUCT GROWTH
         ========================= */
 
         updateProductGrowth(products);
-
 
         /* =========================
            PENDING OPERATIONS
@@ -164,13 +153,11 @@ async function loadDashboardData() {
 
         await loadPendingOperations();
 
-
         /* =========================
            LOW STOCK ALERTS
         ========================= */
 
         loadLowStockAlerts(products);
-
 
         /* =========================
            STOCK MOVEMENT GRAPH
@@ -184,9 +171,6 @@ async function loadDashboardData() {
         ========================= */
 
         await loadRecentMovements();
-
-
-        console.log("Dashboard updated successfully.");
 
     }
 
@@ -925,7 +909,10 @@ if (logoutBtn) {
             window.location.href = "index.html";
         } catch (error) {
             console.error("Logout error:", error);
-            alert("Unable to logout. Please try again.");
+            showToast(
+                "Unable to logout. Please try again.",
+                "Logout Error"
+            );
         }
     });
 }

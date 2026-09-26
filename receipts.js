@@ -44,7 +44,10 @@ receiptForm.addEventListener("submit", async (event) => {
             `Receipt from ${supplier}`
         );
 
-        alert("Receipt validated! Stock increased successfully.");
+        showToast(
+            "Stock increased successfully.",
+            "Receipt Validated"
+        );
 
         receiptForm.reset();
 

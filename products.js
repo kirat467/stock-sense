@@ -126,13 +126,13 @@ productForm.addEventListener("submit", async (event) => {
 
     try {
 
-        console.log("Adding product:", product);
-
         const productId = await addProduct(product);
 
-        console.log("PRODUCT ADDED SUCCESSFULLY:", productId);
 
-        alert("Product added successfully!");
+            showToast(
+                "Product has been added successfully!",
+                "Product Added"
+            );
 
         productForm.reset();
 
@@ -405,6 +405,11 @@ window.removeProduct = async function(productId) {
 
         await deleteProduct(productId);
 
+        showToast(
+            "Product has been deleted successfully!",
+            "Product Deleted"
+        );
+
         await loadProducts();
 
     } catch (error) {
@@ -466,7 +471,10 @@ window.editProduct = async function(productId) {
                 stock: stock
             }
         );
-
+        showToast(
+            "Product stock has been updated successfully!",
+            "Product Updated"
+        );
 
         await loadProducts();
 

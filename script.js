@@ -101,7 +101,10 @@ document.getElementById("signupForm").onsubmit = async function(event) {
 
     if (!name || !email || !password) {
 
-        alert("Please fill in all fields.");
+            showToast(
+                "Please fill in all fields.",
+                "Missing Information"
+            );
 
         return;
     }
@@ -109,7 +112,10 @@ document.getElementById("signupForm").onsubmit = async function(event) {
 
     if (password.length < 6) {
 
-        alert("Password must be at least 6 characters.");
+        showToast(
+            "Password must be at least 6 characters.",
+            "Invalid Password"
+        );
 
         return;
     }
@@ -131,9 +137,6 @@ document.getElementById("signupForm").onsubmit = async function(event) {
 
         document.getElementById("signupNotice").style.display =
             "block";
-
-
-        console.log("Created user:", result.user);
 
     } else {
 
@@ -184,7 +187,10 @@ document.getElementById("sendOtp").onclick = async function() {
 
     if (!email) {
 
-        alert("Please enter your email address.");
+        showToast(
+            "Please enter your email address.",
+            "Email Required"
+        );
 
         return;
     }
@@ -206,12 +212,6 @@ document.getElementById("sendOtp").onclick = async function() {
 
         otpNotice.style.display =
             "block";
-
-
-        console.log(
-            "Password reset email sent to:",
-            email
-        );
 
     } else {
 
@@ -251,13 +251,16 @@ document.getElementById("demoDashboardBtn").addEventListener("click", async () =
             window.location.href = "dashboard.html";
         } else {
             console.error("Demo login failed:", result.error);
-            alert(
-                "Demo login failed.\n\n" +
-                result.error
+            showToast(
+                result.error,
+                "Demo Login Failed"
             );
         }
     } catch (error) {
         console.error("Demo login error:", error);
-        alert("Unable to start demo mode.");
+            showToast(
+                "Unable to start demo mode.",
+                "Demo Mode Error"
+            );
     }
 });

@@ -84,11 +84,9 @@ transferForm.addEventListener("submit", async (event) => {
 
 
     if (fromLocation === toLocation) {
-
         alert(
             "Source and destination must be different."
         );
-
         return;
     }
 
@@ -172,32 +170,22 @@ transferForm.addEventListener("submit", async (event) => {
             collection(db, "stockLedger"),
             {
                 productId: productId,
-
                 type: "TRANSFER",
-
                 quantity: quantity,
-
                 fromLocation: fromLocation,
-
                 toLocation: toLocation,
-
                 reason:
                     `Transfer from ${fromLocation} to ${toLocation}`,
-
                 createdAt: serverTimestamp()
             }
         );
 
-
-        alert(
-            `Transfer successful!\n\n` +
-            `${quantity} moved from ${fromLocation} to ${toLocation}.`
+        showToast(
+            `${quantity} moved from ${fromLocation} to ${toLocation}.`,
+            "Transfer Completed"
         );
-
         transferForm.reset();
-
         await loadProducts();
-
 
     } catch (error) {
 
