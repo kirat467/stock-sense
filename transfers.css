@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0f1117;
+    color: #f5f7fa;
+    min-height: 100vh;
+}
+
+.page-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 55px auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #9299a8;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 13px 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#backBtn {
+    background: #292e39;
+    color: white;
+}
+
+#backBtn:hover {
+    background: #343a47;
+}
+
+.form-card {
+    background: #171a22;
+    border: 1px solid #292e39;
+    border-radius: 18px;
+    padding: 35px;
+}
+
+label {
+    display: block;
+    color: #cbd0da;
+    font-weight: 600;
+    margin-bottom: 8px;
+    margin-top: 20px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 14px;
+    background: #0f1117;
+    color: white;
+    border: 1px solid #343a47;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #3b82f6;
+}
+
+.transfer-btn {
+    width: 100%;
+    margin-top: 30px;
+    background: #3b82f6;
+    color: white;
+    font-size: 15px;
+}
+
+.transfer-btn:hover {
+    opacity: 0.9;
+}
