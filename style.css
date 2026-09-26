@@ -741,3 +741,22 @@ input:focus {
     }
 
 }
+
+.demo-dashboard-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+    border: 1px solid #2f3a46;
+    border-radius: 10px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.demo-dashboard-btn:hover {
+    border-color: #3ddc84;
+    color: #3ddc84;
+}

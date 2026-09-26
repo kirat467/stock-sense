@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StockSense — Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="logo">↗</div>
+                <span>StockSense</span>
+            </div>
+
+            <div class="sidebar-label">WORKSPACE</div>
+
+            <nav class="navigation">
+
+                <a href="#" class="nav-item active">
+                    <span>▦</span>
+                    Dashboard
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span>□</span>
+                    Products
+                </a>
+
+                <div class="sidebar-label operations-label">
+                    OPERATIONS
+                </div>
+
+                <a href="#" class="nav-item">
+                    <span>↓</span>
+                    Receipts
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span>↑</span>
+                    Deliveries
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span>⇄</span>
+                    Transfers
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span>◈</span>
+                    Adjustments
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span>≡</span>
+                    Move History
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="#" class="nav-item">
+                    <span>⚙</span>
+                    Settings
+                </a>
+
+                <div class="profile-mini">
+
+                    <div class="avatar" id="sidebarAvatar">
+                        T
+                    </div>
+
+                    <div class="profile-info">
+                        <strong id="sidebarName">User</strong>
+                        <span id="sidebarEmail">user@email.com</span>
+                    </div>
+
+                    <button id="logoutBtn" title="Logout">
+                        ↪
+                    </button>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main">
+
+            <!-- TOP BAR -->
+            <header class="topbar">
+
+                <div>
+                    <div class="breadcrumb">
+                        Workspace / Dashboard
+                    </div>
+
+                    <h1>Inventory Dashboard</h1>
+                </div>
+
+                <div class="top-actions">
+
+                    <button class="icon-button">
+                        🔔
+                        <span class="notification-dot"></span>
+                    </button>
+
+                    <div class="top-profile">
+
+                        <div class="avatar" id="topAvatar">
+                            T
+                        </div>
+
+                        <div>
+                            <strong id="topName">User</strong>
+                            <span>Inventory Manager</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- WELCOME -->
+            <section class="welcome">
+
+                <div>
+                    <span class="eyebrow">LIVE INVENTORY</span>
+
+                    <h2>
+                        Good to see you, <span id="welcomeName">there</span>.
+                    </h2>
+
+                    <p>
+                        Here's what's happening across your inventory today.
+                    </p>
+                </div>
+
+                <button class="primary-btn">
+                    + Add Product
+                </button>
+
+            </section>
+
+
+            <!-- KPI CARDS -->
+            <section class="kpi-grid">
+
+                <div class="kpi-card">
+
+                    <div class="kpi-top">
+                        <span>Total Products</span>
+                        <div class="kpi-icon green">▦</div>
+                    </div>
+
+                    <div class="kpi-value">1,248</div>
+
+                    <div class="kpi-footer positive">
+                        ↑ 8.4%
+                        <span>from last month</span>
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <div class="kpi-top">
+                        <span>Low / Out of Stock</span>
+                        <div class="kpi-icon red">!</div>
+                    </div>
+
+                    <div class="kpi-value">23</div>
+
+                    <div class="kpi-footer negative">
+                        ↑ 3 items
+                        <span>need attention</span>
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <div class="kpi-top">
+                        <span>Pending Receipts</span>
+                        <div class="kpi-icon blue">↓</div>
+                    </div>
+
+                    <div class="kpi-value">12</div>
+
+                    <div class="kpi-footer neutral">
+                        4 arriving today
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <div class="kpi-top">
+                        <span>Pending Deliveries</span>
+                        <div class="kpi-icon orange">↑</div>
+                    </div>
+
+                    <div class="kpi-value">8</div>
+
+                    <div class="kpi-footer neutral">
+                        3 ready to ship
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CONTENT GRID -->
+            <section class="content-grid">
+
+                <!-- STOCK OVERVIEW -->
+                <div class="panel stock-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Stock Overview</h3>
+                            <p>Inventory movement over the last 7 days</p>
+                        </div>
+
+                        <select>
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 90 days</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="chart">
+
+                        <div class="chart-y">
+                            <span>500</span>
+                            <span>400</span>
+                            <span>300</span>
+                            <span>200</span>
+                            <span>100</span>
+                            <span>0</span>
+                        </div>
+
+                        <div class="chart-area">
+
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+
+                            <svg viewBox="0 0 700 260"
+                                 preserveAspectRatio="none">
+
+                                <defs>
+                                    <linearGradient id="chartFill"
+                                                    x1="0"
+                                                    y1="0"
+                                                    x2="0"
+                                                    y2="1">
+
+                                        <stop offset="0"
+                                              stop-color="#19c37d"
+                                              stop-opacity=".25"/>
+
+                                        <stop offset="1"
+                                              stop-color="#19c37d"
+                                              stop-opacity="0"/>
+
+                                    </linearGradient>
+                                </defs>
+
+                                <path
+                                    d="M0 205
+                                       L100 175
+                                       L200 190
+                                       L300 125
+                                       L400 145
+                                       L500 85
+                                       L600 110
+                                       L700 55
+                                       L700 260
+                                       L0 260Z"
+                                    fill="url(#chartFill)"
+                                />
+
+                                <path
+                                    d="M0 205
+                                       L100 175
+                                       L200 190
+                                       L300 125
+                                       L400 145
+                                       L500 85
+                                       L600 110
+                                       L700 55"
+                                    fill="none"
+                                    stroke="#19c37d"
+                                    stroke-width="4"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+
+                            </svg>
+
+                            <div class="chart-days">
+                                <span>Mon</span>
+                                <span>Tue</span>
+                                <span>Wed</span>
+                                <span>Thu</span>
+                                <span>Fri</span>
+                                <span>Sat</span>
+                                <span>Sun</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="chart-legend">
+                        <span>
+                            <i class="legend-dot incoming"></i>
+                            Incoming
+                        </span>
+
+                        <span>
+                            <i class="legend-dot outgoing"></i>
+                            Outgoing
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- LOW STOCK -->
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Low Stock Alerts</h3>
+                            <p>Products requiring attention</p>
+                        </div>
+
+                        <button class="text-btn">
+                            View all →
+                        </button>
+
+                    </div>
+
+
+                    <div class="product-list">
+
+                        <div class="product-row">
+
+                            <div class="product-symbol red-bg">
+                                SR
+                            </div>
+
+                            <div class="product-info">
+                                <strong>Steel Rods</strong>
+                                <span>SKU-00124</span>
+                            </div>
+
+                            <div class="stock-number danger">
+                                8
+                                <small>left</small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="product-row">
+
+                            <div class="product-symbol orange-bg">
+                                CH
+                            </div>
+
+                            <div class="product-info">
+                                <strong>Office Chairs</strong>
+                                <span>SKU-00231</span>
+                            </div>
+
+                            <div class="stock-number warning">
+                                14
+                                <small>left</small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="product-row">
+
+                            <div class="product-symbol red-bg">
+                                CB
+                            </div>
+
+                            <div class="product-info">
+                                <strong>Copper Bars</strong>
+                                <span>SKU-00482</span>
+                            </div>
+
+                            <div class="stock-number danger">
+                                4
+                                <small>left</small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="product-row">
+
+                            <div class="product-symbol orange-bg">
+                                BK
+                            </div>
+
+                            <div class="product-info">
+                                <strong>Brake Kits</strong>
+                                <span>SKU-00519</span>
+                            </div>
+
+                            <div class="stock-number warning">
+                                11
+                                <small>left</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- BOTTOM GRID -->
+            <section class="bottom-grid">
+
+                <!-- RECENT MOVEMENTS -->
+                <div class="panel movements-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Recent Stock Movements</h3>
+                            <p>Latest inventory activity</p>
+                        </div>
+
+                        <button class="text-btn">
+                            View history →
+                        </button>
+
+                    </div>
+
+
+                    <div class="movement-table">
+
+                        <div class="table-head">
+                            <span>Product</span>
+                            <span>Type</span>
+                            <span>Quantity</span>
+                            <span>Location</span>
+                            <span>Time</span>
+                        </div>
+
+
+                        <div class="table-row">
+
+                            <strong>Steel Rods</strong>
+
+                            <span class="badge incoming-badge">
+                                Receipt
+                            </span>
+
+                            <span class="quantity positive">
+                                +50
+                            </span>
+
+                            <span>Main Warehouse</span>
+
+                            <span>2 min ago</span>
+
+                        </div>
+
+
+                        <div class="table-row">
+
+                            <strong>Office Chairs</strong>
+
+                            <span class="badge outgoing-badge">
+                                Delivery
+                            </span>
+
+                            <span class="quantity negative">
+                                −10
+                            </span>
+
+                            <span>Warehouse 1</span>
+
+                            <span>18 min ago</span>
+
+                        </div>
+
+
+                        <div class="table-row">
+
+                            <strong>Copper Bars</strong>
+
+                            <span class="badge adjustment-badge">
+                                Adjustment
+                            </span>
+
+                            <span class="quantity negative">
+                                −3
+                            </span>
+
+                            <span>Production Rack</span>
+
+                            <span>1 hr ago</span>
+
+                        </div>
+
+
+                        <div class="table-row">
+
+                            <strong>Brake Kits</strong>
+
+                            <span class="badge transfer-badge">
+                                Transfer
+                            </span>
+
+                            <span class="quantity neutral">
+                                25
+                            </span>
+
+                            <span>Warehouse 1 → 2</span>
+
+                            <span>2 hrs ago</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+                <div class="panel quick-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Quick Actions</h3>
+                            <p>Common inventory operations</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+                        <button class="quick-action">
+                            <div class="quick-icon green">↓</div>
+                            <div>
+                                <strong>Receive Stock</strong>
+                                <span>Record incoming goods</span>
+                            </div>
+                            <b>→</b>
+                        </button>
+
+
+                        <button class="quick-action">
+                            <div class="quick-icon red">↑</div>
+                            <div>
+                                <strong>Create Delivery</strong>
+                                <span>Record outgoing goods</span>
+                            </div>
+                            <b>→</b>
+                        </button>
+
+
+                        <button class="quick-action">
+                            <div class="quick-icon blue">⇄</div>
+                            <div>
+                                <strong>Transfer Stock</strong>
+                                <span>Move between locations</span>
+                            </div>
+                            <b>→</b>
+                        </button>
+
+
+                        <button class="quick-action">
+                            <div class="quick-icon orange">◈</div>
+                            <div>
+                                <strong>Adjust Inventory</strong>
+                                <span>Fix stock discrepancies</span>
+                            </div>
+                            <b>→</b>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script type="module" src="dashboard.js"></script>
+
+</body>
+</html>
